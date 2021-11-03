@@ -2,6 +2,8 @@ package GroupTask1;
 
 import cn.hutool.core.io.file.FileWriter;
 
+import java.util.Scanner;
+
 /**
  * @Author: WD
  * @Date: 2021/11/2 21:23
@@ -10,12 +12,19 @@ public class IssueTest {
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
         String bannerWords = "(普信|暴风吸入|绝绝子|yyds|jio|无语子|集美|真下头)";
         String txt1 = "今日份仙女营业啦 今天去买奶茶鸭，救命~我真的哭死~\n" +
                 "呜呜呜这家店的奶茶真是yyds 啊啊啊啊啊啊蛋糕也是绝绝子 ！我暴风吸入\n " +
                 "好喝到跺jiojio！路上还看见一个普信男，无语子，真下头，不管啦，\n" +
                 "今天跟集美也是在逃公主的一天 好想谈一场双向奔赴的恋爱呜呜呜 \n";
         String txt2 = "香稻啄余鹦鹉粒，碧梧栖老凤凰枝。";
+
+        System.out.println("请输入标题：");
+        String title = scanner.next();
+        System.out.println("请输入内容：");
+        String myContent = scanner.next();
 
         Picture pic01 = new Picture("Cat01.jpg", 2048);
         Picture pic02 = new Picture("Cat02.PNG", 5048);
@@ -37,9 +46,9 @@ public class IssueTest {
         Picture[] pictures3 = {pic01,pic02,pic03,pic04,pic05,pic06,pic07,pic11};
 
         Post post = new Post();
-        post.setHeading("网络脑瘫词语大赏");
+        post.setHeading(title);
         post.setPictures(pictures1);
-        post.setContent(txt1);
+        post.setContent(myContent);
         // 发布帖子
         issueMyPost(bannerWords, post);
     }
@@ -58,7 +67,7 @@ public class IssueTest {
         if (result){
 
             // huTool 文件写入到txt文档
-            FileWriter writer = new FileWriter("C:\\Users\\FANGCHAO\\Desktop\\test\\myPost.txt");
+            FileWriter writer = new FileWriter("C:\\Users\\test\\Desktop\\test\\myPost.txt");
             // 替换成”***“,若要过滤则replacement为空;
             String contents = post.getContent().replaceAll(bannerWords,"***");
 
