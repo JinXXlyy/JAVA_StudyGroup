@@ -1,5 +1,7 @@
 package GroupTask1;
 
+import cn.hutool.core.io.file.FileWriter;
+
 /**
  * @Author: WD
  * @Date: 2021/11/2 21:23
@@ -54,10 +56,15 @@ public class IssueTest {
         System.out.println(result);
         // 若标题和图片无异常抛出，则开始对内容进行敏感词加密，或过滤
         if (result){
+
+            // huTool 文件写入到txt文档
+            FileWriter writer = new FileWriter("C:\\Users\\FANGCHAO\\Desktop\\test\\myPost.txt");
             // 替换成”***“,若要过滤则replacement为空;
             String contents = post.getContent().replaceAll(bannerWords,"***");
-            System.out.println("标题：《" + post.getHeading() + "》");
-            System.out.println("内容：\n" + contents);
+
+            writer.append("标题：《" + post.getHeading() + "》\n");
+            writer.append("内容：\n" + contents);
+
         }
     }
 }
